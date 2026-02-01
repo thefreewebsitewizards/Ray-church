@@ -1,0 +1,593 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Church Events Calendar - Chesaw Community Bible Church">
+  <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+    <main class="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-10 py-8">
+      <div class="flex flex-col md:flex-row flex-wrap justify-between items-start md:items-end gap-6 mb-8">
+        <div class="flex flex-col gap-2">
+          <h1 class="text-[#0d121b] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Church Events Calendar</h1>
+          <p class="text-[#4c669a] dark:text-gray-400 text-base font-normal leading-normal">
+            Join us for worship, bible study, and community fellowship.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex bg-white dark:bg-[#1a2235] rounded-lg border border-gray-200 dark:border-gray-700 p-1">
+            <button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors" data-month-prev type="button">
+              <span class="material-symbols-outlined text-gray-600 dark:text-gray-300">chevron_left</span>
+            </button>
+            <div class="px-4 py-2 font-bold text-lg min-w-[140px] text-center dark:text-white" data-month-label>October 2023</div>
+            <button class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors" data-month-next type="button">
+              <span class="material-symbols-outlined text-gray-600 dark:text-gray-300">chevron_right</span>
+            </button>
+          </div>
+          <button class="flex items-center gap-2 h-11 px-4 bg-[#e7ebf3] hover:bg-[#dce2ee] dark:bg-gray-800 dark:hover:bg-gray-700 text-[#0d121b] dark:text-white rounded-lg text-sm font-bold transition-colors" data-download-calendar type="button">
+            <span class="material-symbols-outlined text-[20px]">download</span>
+            <span class="hidden sm:inline">Download Calendar</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex gap-3 mb-6 flex-wrap">
+        <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full border border-transparent bg-primary/10 hover:bg-primary/20 text-primary dark:text-blue-300 px-4 transition-colors" data-filter="service" type="button">
+          <span class="material-symbols-outlined text-[18px]">sunny</span>
+          <span class="text-sm font-medium">Sunday Service</span>
+        </button>
+        <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full border border-transparent bg-secondary/10 hover:bg-secondary/20 text-secondary dark:text-teal-300 px-4 transition-colors" data-filter="study" type="button">
+          <span class="material-symbols-outlined text-[18px]">menu_book</span>
+          <span class="text-sm font-medium">Bible Study</span>
+        </button>
+        <button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full border border-transparent bg-purple-100 hover:bg-purple-200 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 px-4 transition-colors" data-filter="fellowship" type="button">
+          <span class="material-symbols-outlined text-[18px]">groups</span>
+          <span class="text-sm font-medium">Community Fellowship</span>
+        </button>
+      </div>
+      <div class="bg-white dark:bg-[#1a2235] rounded-xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden">
+        <div class="grid grid-cols-7 border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#151c2c]">
+          <div class="py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Sun</div>
+          <div class="py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Mon</div>
+          <div class="py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Tue</div>
+          <div class="py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Wed</div>
+          <div class="py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Thu</div>
+          <div class="py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Fri</div>
+          <div class="py-3 text-center text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Sat</div>
+        </div>
+        <div class="grid grid-cols-7 auto-rows-[minmax(120px,_1fr)] divide-x divide-y divide-gray-200 dark:divide-gray-800">
+          <div class="p-2 min-h-[120px] bg-gray-50/50 dark:bg-gray-900/20">
+            <span class="text-gray-400 dark:text-gray-600 font-medium text-sm">29</span>
+          </div>
+          <div class="p-2 min-h-[120px] bg-gray-50/50 dark:bg-gray-900/20">
+            <span class="text-gray-400 dark:text-gray-600 font-medium text-sm">30</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group relative">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">1</span>
+            <div class="mt-1 space-y-1">
+              <div class="bg-primary/10 text-primary dark:text-blue-200 dark:bg-primary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                10:00 AM Sunday Service
+              </div>
+              <div class="bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-purple-600 hover:text-white transition-colors">
+                6:00 PM Youth Group
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">2</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">3</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">4</span>
+            <div class="mt-1">
+              <div class="bg-secondary/10 text-secondary dark:text-teal-200 dark:bg-secondary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-secondary hover:text-white transition-colors">
+                6:30 PM Bible Study
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-white font-bold text-sm">5</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">6</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">7</span>
+            <div class="mt-1">
+              <div class="bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-purple-600 hover:text-white transition-colors">
+                9:00 AM Food Bank
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">8</span>
+            <div class="mt-1">
+              <div class="bg-primary/10 text-primary dark:text-blue-200 dark:bg-primary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                10:00 AM Sunday Service
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">9</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">10</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">11</span>
+            <div class="mt-1">
+              <div class="bg-secondary/10 text-secondary dark:text-teal-200 dark:bg-secondary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-secondary hover:text-white transition-colors">
+                6:30 PM Bible Study
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">12</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">13</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">14</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">15</span>
+            <div class="mt-1">
+              <div class="bg-primary/10 text-primary dark:text-blue-200 dark:bg-primary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                10:00 AM Sunday Service
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">16</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">17</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">18</span>
+            <div class="mt-1">
+              <div class="bg-secondary/10 text-secondary dark:text-teal-200 dark:bg-secondary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-secondary hover:text-white transition-colors">
+                6:30 PM Bible Study
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">19</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">20</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors relative group">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">21</span>
+            <div class="mt-1">
+              <div class="bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-purple-600 hover:text-white transition-colors">
+                5:00 PM Community Potluck
+              </div>
+            </div>
+            <div class="absolute left-1/2 -translate-x-1/2 top-full z-10 hidden group-hover:block w-64 pt-2">
+              <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 p-4">
+                <h4 class="font-bold text-gray-900 dark:text-white mb-1">Community Potluck</h4>
+                <div class="text-xs text-gray-500 dark:text-gray-400 mb-3">Saturday, Oct 21 • 5:00 PM</div>
+                <div class="flex items-start gap-2 mb-2">
+                  <span class="material-symbols-outlined text-gray-400 text-[18px]">location_on</span>
+                  <span class="text-sm text-gray-600 dark:text-gray-300">Community Center</span>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">Bring your favorite dish to share! All are welcome.</p>
+                <button class="w-full text-xs font-bold text-primary dark:text-blue-300 bg-primary/5 hover:bg-primary/10 py-2 rounded transition-colors" data-open-event type="button">
+                  View Details
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">22</span>
+            <div class="mt-1">
+              <div class="bg-primary/10 text-primary dark:text-blue-200 dark:bg-primary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                10:00 AM Sunday Service
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">23</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">24</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">25</span>
+            <div class="mt-1">
+              <div class="bg-secondary/10 text-secondary dark:text-teal-200 dark:bg-secondary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-secondary hover:text-white transition-colors">
+                6:30 PM Bible Study
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">26</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">27</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">28</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">29</span>
+            <div class="mt-1">
+              <div class="bg-primary/10 text-primary dark:text-blue-200 dark:bg-primary/30 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                10:00 AM Sunday Service
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">30</span>
+          </div>
+          <div class="p-2 min-h-[120px] hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+            <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">31</span>
+            <div class="mt-1">
+              <div class="bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 text-xs font-medium px-2 py-1 rounded truncate cursor-pointer hover:bg-red-600 hover:text-white transition-colors">
+                6:00 PM Trunk or Treat
+              </div>
+            </div>
+          </div>
+          <div class="p-2 min-h-[120px] bg-gray-50/50 dark:bg-gray-900/20">
+            <span class="text-gray-400 dark:text-gray-600 font-medium text-sm">1</span>
+          </div>
+          <div class="p-2 min-h-[120px] bg-gray-50/50 dark:bg-gray-900/20">
+            <span class="text-gray-400 dark:text-gray-600 font-medium text-sm">2</span>
+          </div>
+          <div class="p-2 min-h-[120px] bg-gray-50/50 dark:bg-gray-900/20">
+            <span class="text-gray-400 dark:text-gray-600 font-medium text-sm">3</span>
+          </div>
+          <div class="p-2 min-h-[120px] bg-gray-50/50 dark:bg-gray-900/20">
+            <span class="text-gray-400 dark:text-gray-600 font-medium text-sm">4</span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-10">
+        <h3 class="text-[#0d121b] dark:text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-6">Upcoming This Week</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white dark:bg-[#1a2235] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined">church</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#0d121b] dark:text-white">Sunday Morning Worship</h4>
+                <p class="text-sm text-[#4c669a] dark:text-gray-400">Main Sanctuary</p>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+              Join us for a time of worship and a sermon from Pastor Dave. Children's church is available.
+            </p>
+            <div class="mt-auto pt-2 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+              <span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Sunday, 10:00 AM</span>
+              <button class="text-primary text-sm font-semibold hover:underline" data-event-title="Sunday Morning Worship" data-event-location="Main Sanctuary" data-event-time="Sunday, 10:00 AM" data-open-event type="button">Details</button>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-[#1a2235] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary dark:text-teal-300">
+                <span class="material-symbols-outlined">menu_book</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#0d121b] dark:text-white">Mid-Week Bible Study</h4>
+                <p class="text-sm text-[#4c669a] dark:text-gray-400">Fellowship Hall</p>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+              We are currently going through the book of Romans. Coffee and refreshments provided.
+            </p>
+            <div class="mt-auto pt-2 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+              <span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Wed, 6:30 PM</span>
+              <button class="text-primary text-sm font-semibold hover:underline" data-event-title="Mid-Week Bible Study" data-event-location="Fellowship Hall" data-event-time="Wed, 6:30 PM" data-open-event type="button">Details</button>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-[#1a2235] rounded-xl p-5 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-700 dark:text-purple-300">
+                <span class="material-symbols-outlined">groups</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-[#0d121b] dark:text-white">Community Potluck</h4>
+                <p class="text-sm text-[#4c669a] dark:text-gray-400">Community Center</p>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+              A time for fellowship and food. Bring a main dish or a side to share with the community.
+            </p>
+            <div class="mt-auto pt-2 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center">
+              <span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase">Sat, 5:00 PM</span>
+              <button class="text-primary text-sm font-semibold hover:underline" data-event-title="Community Potluck" data-event-location="Community Center" data-event-time="Sat, 5:00 PM" data-open-event type="button">Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div aria-hidden="true" class="hidden fixed inset-0 z-50" data-event-modal>
+    <div class="absolute inset-0 bg-black/40" data-event-modal-overlay></div>
+    <div class="absolute left-1/2 top-1/2 w-[92%] max-w-[520px] -translate-x-1/2 -translate-y-1/2">
+      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+        <div class="p-5 border-b border-gray-100 dark:border-gray-700 flex items-start justify-between gap-4">
+          <div class="min-w-0">
+            <h4 class="font-bold text-gray-900 dark:text-white text-lg leading-tight" data-event-modal-title>Event Details</h4>
+            <div class="text-xs text-gray-500 dark:text-gray-400 mt-1" data-event-modal-time></div>
+          </div>
+          <button class="text-gray-600 dark:text-gray-300 p-2 -m-2" data-event-modal-close type="button">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="p-5 space-y-4">
+          <div class="flex items-start gap-2">
+            <span class="material-symbols-outlined text-gray-400 text-[18px]">location_on</span>
+            <span class="text-sm text-gray-600 dark:text-gray-300" data-event-modal-location></span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-300" data-event-modal-description></p>
+          <div class="pt-2">
+            <button class="w-full text-sm font-bold text-primary dark:text-blue-300 bg-primary/5 hover:bg-primary/10 py-3 rounded transition-colors" data-event-modal-ics type="button">
+              Add to Calendar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const monthLabel = document.querySelector('[data-month-label]');
+    const prev = document.querySelector('[data-month-prev]');
+    const next = document.querySelector('[data-month-next]');
+    const downloadButton = document.querySelector('[data-download-calendar]');
+    const filterButtons = Array.from(document.querySelectorAll('button[data-filter]'));
+    const modal = document.querySelector('[data-event-modal]');
+    const modalOverlay = document.querySelector('[data-event-modal-overlay]');
+    const modalClose = document.querySelector('[data-event-modal-close]');
+    const modalTitle = document.querySelector('[data-event-modal-title]');
+    const modalTime = document.querySelector('[data-event-modal-time]');
+    const modalLocation = document.querySelector('[data-event-modal-location]');
+    const modalDescription = document.querySelector('[data-event-modal-description]');
+    const modalIcs = document.querySelector('[data-event-modal-ics]');
+
+    const monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    const state = {
+      year: 2023,
+      month: 9,
+      activeFilter: null,
+      event: null,
+    };
+
+    const setMonthLabel = () => {
+      if (!monthLabel) return;
+      monthLabel.textContent = `${monthNames[state.month]} ${state.year}`;
+    };
+
+    const toIcsDate = (date) => {
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${date.getUTCFullYear()}${pad(date.getUTCMonth() + 1)}${pad(date.getUTCDate())}T${pad(date.getUTCHours())}${pad(
+        date.getUTCMinutes(),
+      )}${pad(date.getUTCSeconds())}Z`;
+    };
+
+    const downloadIcs = ({ title, start, end, location, description, filename }) => {
+      const uid = `${Date.now()}-${Math.random().toString(16).slice(2)}@chesawchurch.org`;
+      const body = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Chesaw Community Bible Church//Calendar//EN',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${toIcsDate(new Date())}`,
+        `DTSTART:${toIcsDate(start)}`,
+        `DTEND:${toIcsDate(end)}`,
+        `SUMMARY:${title.replace(/\n/g, ' ')}`,
+        `LOCATION:${location.replace(/\n/g, ' ')}`,
+        `DESCRIPTION:${description.replace(/\n/g, ' ')}`,
+        'END:VEVENT',
+        'END:VCALENDAR',
+      ].join('\r\n');
+
+      const blob = new Blob([body], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    };
+
+    const inferEvent = (text) => {
+      const t = text.trim();
+      if (!t) return null;
+      const lower = t.toLowerCase();
+
+      let title = t;
+      let location = 'Chesaw Community Bible Church';
+      let description = 'Join us for this event. Details are provided for prototype purposes.';
+
+      if (lower.includes('sunday service')) {
+        title = 'Sunday Service';
+        location = 'Main Sanctuary';
+        description = 'Weekly worship service with scripture, prayer, and a message from our pastor.';
+      } else if (lower.includes('bible study')) {
+        title = 'Bible Study';
+        location = 'Fellowship Hall';
+        description = 'Midweek study and discussion. Coffee and refreshments provided.';
+      } else if (lower.includes('youth')) {
+        title = 'Youth Group';
+        location = 'Youth Room';
+        description = 'A night for students to connect, worship, and grow together.';
+      } else if (lower.includes('food bank')) {
+        title = 'Food Bank';
+        location = 'Outreach Center';
+        description = 'Serving our community with food distribution and prayer support.';
+      } else if (lower.includes('potluck')) {
+        title = 'Community Potluck';
+        location = 'Community Center';
+        description = 'Bring a dish to share and enjoy fellowship with the community.';
+      } else if (lower.includes('trunk')) {
+        title = 'Trunk or Treat';
+        location = 'Church Parking Lot';
+        description = 'Family-friendly evening with decorated trunks, candy, and community fun.';
+      }
+
+      return { title, time: '', location, description };
+    };
+
+    const setModalOpen = (open) => {
+      if (!modal) return;
+      modal.classList.toggle('hidden', !open);
+      modal.setAttribute('aria-hidden', open ? 'false' : 'true');
+    };
+
+    const openEventModal = (event) => {
+      state.event = event;
+      if (modalTitle) modalTitle.textContent = event.title;
+      if (modalTime) modalTime.textContent = event.time || '';
+      if (modalLocation) modalLocation.textContent = event.location || '';
+      if (modalDescription) modalDescription.textContent = event.description || '';
+      setModalOpen(true);
+    };
+
+    const closeEventModal = () => {
+      state.event = null;
+      setModalOpen(false);
+    };
+
+    modalOverlay?.addEventListener('click', closeEventModal);
+    modalClose?.addEventListener('click', closeEventModal);
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (!modal || modal.classList.contains('hidden')) return;
+      closeEventModal();
+    });
+
+    modalIcs?.addEventListener('click', () => {
+      if (!state.event) return;
+      const start = new Date(Date.UTC(state.year, state.month, 21, 17, 0, 0));
+      const end = new Date(Date.UTC(state.year, state.month, 21, 18, 0, 0));
+      downloadIcs({
+        title: state.event.title,
+        start,
+        end,
+        location: state.event.location || 'Chesaw, WA',
+        description: state.event.description || '',
+        filename: `${state.event.title.replace(/\s+/g, '-')}.ics`,
+      });
+    });
+
+    prev?.addEventListener('click', () => {
+      state.month -= 1;
+      if (state.month < 0) {
+        state.month = 11;
+        state.year -= 1;
+      }
+      setMonthLabel();
+    });
+
+    next?.addEventListener('click', () => {
+      state.month += 1;
+      if (state.month > 11) {
+        state.month = 0;
+        state.year += 1;
+      }
+      setMonthLabel();
+    });
+
+    const applyFilter = () => {
+      const allEventEls = Array.from(document.querySelectorAll('.cursor-pointer, button[data-open-event]'));
+      const active = state.activeFilter;
+
+      allEventEls.forEach((el) => {
+        const text =
+          (el instanceof HTMLElement ? el.dataset.eventTitle : null) ||
+          (el instanceof HTMLElement ? el.textContent : '') ||
+          '';
+        const lower = text.toLowerCase();
+        let type = null;
+        if (lower.includes('sunday') || lower.includes('worship') || lower.includes('service')) type = 'service';
+        else if (lower.includes('bible')) type = 'study';
+        else if (lower.includes('community') || lower.includes('potluck') || lower.includes('youth') || lower.includes('food'))
+          type = 'fellowship';
+
+        if (!active) {
+          el.classList.remove('hidden');
+          return;
+        }
+
+        if (type === active) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+    };
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const nextFilter = btn.getAttribute('data-filter');
+        state.activeFilter = state.activeFilter === nextFilter ? null : nextFilter;
+        filterButtons.forEach((b) => b.setAttribute('aria-pressed', b.getAttribute('data-filter') === state.activeFilter ? 'true' : 'false'));
+        applyFilter();
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+
+      const open = target.closest('[data-open-event]');
+      if (open instanceof HTMLElement) {
+        const title = open.dataset.eventTitle;
+        const location = open.dataset.eventLocation;
+        const time = open.dataset.eventTime;
+        const inferred =
+          title || location || time
+            ? {
+                title: title || 'Event Details',
+                location: location || 'Chesaw Community Bible Church',
+                time: time || '',
+                description: 'Details are provided for prototype purposes.',
+              }
+            : null;
+        if (inferred) {
+          openEventModal(inferred);
+          return;
+        }
+      }
+
+      const eventChip = target.closest('.cursor-pointer');
+      if (eventChip instanceof HTMLElement) {
+        const inferred = inferEvent(eventChip.textContent ?? '');
+        if (inferred) openEventModal(inferred);
+      }
+    });
+
+    downloadButton?.addEventListener('click', () => {
+      downloadIcs({
+        title: 'Chesaw Community Bible Church Calendar',
+        start: new Date(Date.UTC(state.year, state.month, 1, 10, 0, 0)),
+        end: new Date(Date.UTC(state.year, state.month, 1, 11, 0, 0)),
+        location: 'Chesaw, WA',
+        description: 'Calendar download generated for prototype purposes.',
+        filename: 'chesaw-community-calendar.ics',
+      });
+    });
+
+    setMonthLabel();
+  </script>
+</SiteLayout>

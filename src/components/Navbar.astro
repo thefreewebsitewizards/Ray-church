@@ -1,0 +1,94 @@
+<header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur shadow-sm border-b border-[#e7ebf3] dark:border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between">
+      <a class="flex items-center gap-3" href="/">
+        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <span class="material-symbols-outlined text-3xl">church</span>
+        </div>
+        <h2 class="font-display font-bold text-xl leading-tight tracking-tight text-[#0d121b] dark:text-white hidden sm:block">
+          Chesaw Community<br /><span class="text-primary text-sm font-body font-normal">Bible Church</span>
+        </h2>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <nav class="flex gap-6">
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200" href="/">Home</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200" href="/about">About Us</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200" href="/ministries">Ministries</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200" href="/sermons">Sermons</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200" href="/contact">Contact</a>
+        </nav>
+        <a class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-md shadow-primary/20" href="/contact?intent=visit">
+          Plan Your Visit
+        </a>
+      </div>
+      <div class="md:hidden flex items-center">
+        <button aria-controls="mobile-nav" aria-expanded="false" class="text-gray-700 dark:text-white p-2" data-mobile-menu-button type="button">
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div aria-hidden="true" class="hidden md:hidden fixed inset-0 z-50" data-mobile-menu id="mobile-nav">
+    <div class="absolute inset-0 bg-black/40" data-mobile-menu-overlay></div>
+    <div class="absolute right-0 top-0 h-full w-[320px] bg-white dark:bg-background-dark shadow-2xl border-l border-[#e7ebf3] dark:border-gray-800">
+      <div class="h-20 px-4 flex items-center justify-between border-b border-[#e7ebf3] dark:border-gray-800">
+        <a class="flex items-center gap-3" href="/">
+          <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <span class="material-symbols-outlined text-3xl">church</span>
+          </div>
+          <h2 class="font-display font-bold text-xl leading-tight tracking-tight text-[#0d121b] dark:text-white">
+            Chesaw Community<br /><span class="text-primary text-sm font-body font-normal">Bible Church</span>
+          </h2>
+        </a>
+        <button class="text-gray-700 dark:text-white p-2" data-mobile-menu-close type="button">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="p-4 flex flex-col gap-4">
+        <nav class="flex flex-col gap-2">
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200 py-2" href="/">Home</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200 py-2" href="/about">About Us</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200 py-2" href="/ministries">Ministries</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200 py-2" href="/sermons">Sermons</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200 py-2" href="/calender">Events</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors dark:text-gray-200 py-2" href="/contact">Contact</a>
+        </nav>
+        <a class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all shadow-md shadow-primary/20 text-center" href="/contact?intent=visit">
+          Plan Your Visit
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const menu = document.querySelector('[data-mobile-menu]');
+  const openButton = document.querySelector('[data-mobile-menu-button]');
+  const closeButton = document.querySelector('[data-mobile-menu-close]');
+  const overlay = document.querySelector('[data-mobile-menu-overlay]');
+
+  const setOpen = (isOpen) => {
+    if (!menu) return;
+    menu.classList.toggle('hidden', !isOpen);
+    menu.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+    if (openButton) openButton.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  };
+
+  openButton?.addEventListener('click', () => setOpen(true));
+  closeButton?.addEventListener('click', () => setOpen(false));
+  overlay?.addEventListener('click', () => setOpen(false));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!menu || menu.classList.contains('hidden')) return;
+    setOpen(false);
+  });
+
+  menu?.addEventListener('click', (e) => {
+    const target = e.target;
+    if (!(target instanceof Element)) return;
+    const link = target.closest('a[href]');
+    if (!link) return;
+    setOpen(false);
+  });
+</script>

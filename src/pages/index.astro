@@ -1,0 +1,149 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Homepage - The Hub">
+  <section class="relative">
+    <div class="absolute inset-0 z-0">
+      <div
+        class="h-full w-full bg-cover bg-center bg-no-repeat"
+        data-alt="warm inviting church sanctuary interior with wooden pews and soft lighting"
+        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDV3j-1DN9nC2KpGfTfyy05vr0U2QwNNWREx5CpUoJWKgx4ifekcNJUWE3RW_9fKuO-5SlGpynoBQfKi_AyEJ4MiZ2HLogrJ30ARzhFWP7UiGZ8595KyYvNpi2a5XfueOzOMHiPXt7fmtBqy2TREhq750cYOTSuxeq__jyCwUbZ0VySz6qp_kRvY86ZQSZU8F0HklATcbF3MTXguUtQ-7-wewfjsxAhwJbTMhkbD1NRRvzamcg3hhJeZzRh9RHNrrDaRggrTijsfw");'
+      ></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#101622]/90 to-[#101622]/40"></div>
+    </div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8 lg:py-48 flex flex-col justify-center min-h-[600px]">
+      <div class="max-w-2xl">
+        <span class="inline-block py-1 px-3 rounded-full bg-accent/20 border border-accent/30 text-accent text-sm font-semibold tracking-wide mb-6 backdrop-blur-sm">
+          Welcome Home
+        </span>
+        <h1 class="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl mb-6 leading-tight">
+          Welcome to Chesaw Community Bible Church
+        </h1>
+        <p class="mt-4 text-xl text-gray-200 font-light max-w-lg mb-10 leading-relaxed">
+          A place to belong, believe, and become. Join us as we grow together in faith and love.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button class="flex items-center justify-center rounded-lg bg-primary px-8 py-3.5 text-base font-bold text-white shadow-lg shadow-primary/30 hover:bg-primary/90 hover:-translate-y-0.5 transition-all duration-200" data-nav="/calender" type="button">
+            Join Us Sunday
+          </button>
+          <button class="flex items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm border border-white/30 px-8 py-3.5 text-base font-bold text-white hover:bg-white/20 hover:-translate-y-0.5 transition-all duration-200" data-nav="/donations" type="button">
+            Give Online
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-24 bg-secondary/30 dark:bg-background-dark relative overflow-hidden">
+    <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-accent/10 blur-3xl"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="font-display text-3xl font-bold text-[#0d121b] dark:text-white sm:text-4xl mb-4">Our Core Values</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+          We are dedicated to fostering a community centered on faith, connection, and service.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="group bg-white dark:bg-[#1a202c] rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/10">
+          <div class="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-gray-900 dark:text-white mb-3">Worship</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Gathering together weekly to honor God through scripture, song, and prayer, lifting our hearts in unity.
+          </p>
+          <a class="inline-flex items-center mt-6 text-primary font-semibold hover:gap-2 transition-all" href="/about">
+            Learn more <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+          </a>
+        </div>
+        <div class="group bg-white dark:bg-[#1a202c] rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/10">
+          <div class="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-3xl">groups</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-gray-900 dark:text-white mb-3">Connect</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Building meaningful relationships within our church family through small groups and fellowship events.
+          </p>
+          <a class="inline-flex items-center mt-6 text-primary font-semibold hover:gap-2 transition-all" href="/ministries">
+            Join a group <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+          </a>
+        </div>
+        <div class="group bg-white dark:bg-[#1a202c] rounded-xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/10">
+          <div class="h-14 w-14 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
+            <span class="material-symbols-outlined text-3xl">favorite</span>
+          </div>
+          <h3 class="font-display text-2xl font-bold text-gray-900 dark:text-white mb-3">Love</h3>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+            Serving our neighbors and community with compassion and kindness, demonstrating God's love in action.
+          </p>
+          <a class="inline-flex items-center mt-6 text-primary font-semibold hover:gap-2 transition-all" href="/ministries">
+            Get involved <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="py-24 bg-white dark:bg-background-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+        <div class="flex-1 space-y-8">
+          <div class="inline-flex items-center gap-2 text-primary font-bold tracking-wider uppercase text-sm">
+            <span class="h-px w-8 bg-primary"></span>
+            Our Vision
+          </div>
+          <h2 class="font-display text-4xl lg:text-5xl font-bold text-[#0d121b] dark:text-white leading-tight">
+            Leading people into a growing relationship with Jesus Christ.
+          </h2>
+          <div class="space-y-6 text-lg text-gray-600 dark:text-gray-300">
+            <p>
+              We believe that church is more than a service on Sunday. It's about connecting with others, growing in your faith,
+              and building a strong foundation for your family.
+            </p>
+            <p>
+              Whether you've never been to church or are looking for a place to call home, you are welcome here. Our vision is to be
+              a beacon of hope and a center for spiritual growth in Chesaw.
+            </p>
+          </div>
+          <div class="pt-4">
+            <button class="bg-[#101622] text-white px-8 py-3.5 rounded-lg text-sm font-bold hover:bg-gray-800 transition-colors dark:bg-white dark:text-[#101622] dark:hover:bg-gray-200" data-nav="/about" type="button">
+              Read Our Full Statement
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 w-full relative">
+          <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
+            <div class="absolute inset-0 bg-primary/10 mix-blend-multiply z-10"></div>
+            <img
+              alt="Community members talking and laughing together outside church"
+              class="h-full w-full object-cover"
+              data-alt="diverse group of happy people talking outdoors"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWkIf4hDBQUCSQ4WiP8y3n2-4VXsjpGfzNAm8k2K8Y6kLLWGhieWH69lfH14SBKNgZt5RNKZ2edWRcJ6KYfW0wOb4pZExIMeYTWaGmPnVuE9v0INOiZ4nB2e1XbTgs1axkLHIK-GZiBOs8ai84u2qJVS_fh8pJvDg5rKQ55_tL1Zty1beUzbQS7TdYSWf3RTwW6560EAB4BqPxPSklZypBAo9FJZ-jKXoZ1RP7OsOSu29bFAJujTUuEyx30iO9D-MQxeeUORQ8Sg"
+            />
+          </div>
+          <div class="absolute -bottom-8 -left-8 bg-secondary p-6 rounded-xl shadow-lg hidden lg:block max-w-xs border border-white">
+            <div class="flex items-start gap-4">
+              <span class="material-symbols-outlined text-4xl text-primary">diversity_3</span>
+              <div>
+                <p class="font-display font-bold text-xl text-[#0d121b] mb-1">Everyone Welcome</p>
+                <p class="text-sm text-gray-600 leading-snug">Join a community where you truly belong.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      const el = target.closest('[data-nav]');
+      if (!el) return;
+      const to = el.getAttribute('data-nav');
+      if (!to) return;
+      e.preventDefault();
+      window.location.assign(to);
+    });
+  </script>
+</SiteLayout>
