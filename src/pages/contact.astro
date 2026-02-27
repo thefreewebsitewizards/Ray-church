@@ -103,12 +103,60 @@ import SiteLayout from "../layouts/SiteLayout.astro";
     </div>
   </main>
 
-  <script is:inline>
+  <script is:inline type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script is:inline type="text/javascript">
+    const EMAILJS_PUBLIC_KEY = 'lo4Nrc560uJzD0H9R';
+    const EMAILJS_SERVICE_ID = 'service_7olqfjp';
+    const EMAILJS_TEMPLATE_CONTACT = 'template_n35jbhd';
+    const EMAILJS_TEMPLATE_CONFIRMATION = 'template_avcsied';
+
     const params = new URLSearchParams(window.location.search);
     const intent = params.get('intent');
     let isSubmitting = false;
 
     const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+    const waitForEmailJs = async () => {
+      const startedAt = Date.now();
+      while (Date.now() - startedAt < 5000) {
+        const api = window.emailjs;
+        if (api && typeof api.send === 'function') return api;
+        await new Promise((r) => setTimeout(r, 50));
+      }
+      return null;
+    };
+
+    const ensureEmailJsReady = async () => {
+      const emailjs = await waitForEmailJs();
+      if (!emailjs) return null;
+
+      if (!window.__ccbcEmailJsReady) {
+        if (typeof emailjs.init === 'function') {
+          try {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+          } catch {
+            emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+          }
+        }
+        window.__ccbcEmailJsReady = true;
+      }
+
+      return emailjs;
+    };
+
+    const describeEmailJsError = (err) => {
+      if (!err) return null;
+
+      const anyErr = err;
+      const status = typeof anyErr.status === 'number' ? anyErr.status : null;
+      const text = typeof anyErr.text === 'string' ? anyErr.text : null;
+      const message = anyErr instanceof Error ? anyErr.message : typeof anyErr.message === 'string' ? anyErr.message : null;
+      const parts = [];
+      if (status !== null) parts.push(`status ${status}`);
+      if (text) parts.push(text);
+      if (message && message !== text) parts.push(message);
+      return parts.length ? parts.join(' - ') : null;
+    };
 
     const setStatus = (el, variant, message) => {
       if (!el) return;
@@ -149,6 +197,16 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       const lastName = (form.elements.namedItem('lastName')?.value ?? '').toString().trim();
       const email = (form.elements.namedItem('email')?.value ?? '').toString().trim();
       const message = (form.elements.namedItem('message')?.value ?? '').toString().trim();
+      const helpIntent = (form.elements.namedItem('intent')?.value ?? '').toString().trim();
+      const helpIntentLabel = (() => {
+        const select = form.elements.namedItem('intent');
+        if (select instanceof HTMLSelectElement) {
+          const option = select.selectedOptions?.[0];
+          const label = option?.textContent?.trim();
+          if (label) return label;
+        }
+        return helpIntent;
+      })();
 
       const errors = [];
       if (!firstName) errors.push('Please enter your first name.');
@@ -170,19 +228,62 @@ import SiteLayout from "../layouts/SiteLayout.astro";
       if (submitText) submitText.textContent = 'Sending...';
       if (submitButton instanceof HTMLButtonElement) submitButton.setAttribute('aria-disabled', 'true');
 
-      const delay = 900 + Math.floor(Math.random() * 800);
-      await new Promise((r) => setTimeout(r, delay));
+      try {
+        const emailjs = await ensureEmailJsReady();
+        if (!emailjs) throw new Error('EmailJS unavailable');
 
-      const didFail = Math.random() < 0.15;
-      if (didFail) {
-        setStatus(statusEl, 'error', 'Something went wrong. Please try again in a moment.');
-      } else {
-        setStatus(statusEl, 'success', 'Message sent! Thanks for reaching out — we’ll follow up soon.');
+        const contactParams = {
+          email,
+          firstName,
+          lastName,
+          intent: helpIntentLabel,
+          message,
+          to_email: 'chesawcbc@gmail.com',
+          to_name: 'Chesaw Community Bible Church',
+          from_name: `${firstName} ${lastName}`.trim(),
+          reply_to: email,
+        };
+
+        const confirmationParams = {
+          to_email: email,
+          to_name: `${firstName} ${lastName}`.trim(),
+          from_name: 'Chesaw Community Bible Church',
+          reply_to: 'chesawcbc@gmail.com',
+          email,
+          firstName,
+          lastName,
+          message,
+          intent: helpIntentLabel,
+        };
+
+        const results = await Promise.allSettled([
+          emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CONTACT, contactParams),
+          emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_CONFIRMATION, confirmationParams),
+        ]);
+
+        const contactOk = results[0]?.status === 'fulfilled';
+        const confirmationOk = results[1]?.status === 'fulfilled';
+        if (!contactOk && !confirmationOk) throw new Error('EmailJS send failed');
+
+        setStatus(
+          statusEl,
+          'success',
+          contactOk && confirmationOk
+            ? 'Message sent! Thanks for reaching out — we’ll follow up soon.'
+            : 'Message sent! If you do not receive a confirmation email, please check your spam folder.'
+        );
         form.reset();
         if (intent) {
           const select = form.querySelector('select[name="intent"]');
           if (select instanceof HTMLSelectElement) select.value = intent;
         }
+      } catch (err) {
+        const details = describeEmailJsError(err);
+        const hint =
+          details && details.toLowerCase().includes('forbidden')
+            ? ' EmailJS blocked this domain. Add your site to EmailJS Allowed Origins.'
+            : '';
+        setStatus(statusEl, 'error', `Unable to send right now. ${details ? `(${details})` : ''}${hint}`.trim());
       }
 
       if (submitText) submitText.textContent = originalText;
