@@ -487,7 +487,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
         title: state.event.title,
         start,
         end,
-        location: state.event.location || 'Chesaw, WA',
+        location: state.event.location || '2048 Chesaw Rd, Oroville, WA 98844',
         description: state.event.description || '',
         filename: `${state.event.title.replace(/\s+/g, '-')}.ics`,
       });
@@ -582,7 +582,7 @@ import SiteLayout from "../layouts/SiteLayout.astro";
         title: 'Chesaw Community Bible Church Calendar',
         start: new Date(Date.UTC(state.year, state.month, 1, 10, 0, 0)),
         end: new Date(Date.UTC(state.year, state.month, 1, 11, 0, 0)),
-        location: 'Chesaw, WA',
+        location: '2048 Chesaw Rd, Oroville, WA 98844',
         description: 'Calendar download generated for prototype purposes.',
         filename: 'chesaw-community-calendar.ics',
       });
